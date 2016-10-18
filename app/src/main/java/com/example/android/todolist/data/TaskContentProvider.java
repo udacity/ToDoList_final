@@ -105,19 +105,42 @@ public class TaskContentProvider extends ContentProvider {
     }
 
 
-    // TODO: Implement query to handle requests for data by URI
+    // COMPLETED: Implement query to handle requests for data by URI
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
 
-        // TODO: 1. Get access to underlying database (read-only for query)
+        // COMPLETED: 1. Get access to underlying database (read-only for query)
+        final SQLiteDatabase db = mTaskDbHelper.getReadableDatabase();
 
-        // TODO: 2. Write URI match code
-        // TODO: 3. Query for the tasks directory and write a default case
+        // COMPLETED: 2. Write URI match code
+        int match = sUriMatcher.match(uri);
 
-        // TODO: 4. Set a notification URI on the Cursor
+        // COMPLETED: 3. Query for the tasks directory and write a default case
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        Cursor retCursor;
+
+        switch (match) {
+            // Query for the tasks directory
+            case TASKS:
+                retCursor =  db.query(TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
+                break;
+            // Default exception
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        // COMPLETED: 4. Set a notification URI on the Cursor
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+
+        // Return the desired Cursor
+        return retCursor;
     }
 
 
