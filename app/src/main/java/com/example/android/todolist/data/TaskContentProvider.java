@@ -105,9 +105,17 @@ public class TaskContentProvider extends ContentProvider {
     }
 
 
+    // TODO: Implement query to handle requests for data by URI
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
+
+        // TODO: 1. Get access to underlying database (read-only for query)
+
+        // TODO: 2. Write URI match code
+        // TODO: 3. Query for the tasks directory and write a default case
+
+        // TODO: 4. Set a notification URI on the Cursor
 
         throw new UnsupportedOperationException("Not yet implemented");
     }
