@@ -61,6 +61,12 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 // Here is where you'll implement swipe to delete
+
+                // TODO: Implement swipe delete for a single item
+                //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
+
+                // TODO: Restart the loader to re-query for all tasks after a deletion
+
             }
         }).attachToRecyclerView(mRecyclerView);
 
