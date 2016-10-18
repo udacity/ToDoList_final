@@ -63,8 +63,18 @@ public class TaskContentProvider extends ContentProvider {
     }
 
 
+    // TODO: Implement insert to handle requests to insert a single new row of data
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
+
+        // TODO: 1. Get access to the task database (to write new data to)
+
+        // TODO: 2. Write URI matching code to identify the match for the tasks directory
+
+        // TODO: 3. Insert new values into the database
+        // TODO: 4. Set the value for the returnedUri and write the default case for unknown URI's
+
+        // TODO: 5. Notify the resolver if the uri has been changed
 
         throw new UnsupportedOperationException("Not yet implemented");
     }
