@@ -184,11 +184,39 @@ public class TaskContentProvider extends ContentProvider {
     }
 
 
+    // Update won't be used in the final ToDoList app but is implemented here for completeness
+    // This updates a single item (by it's ID) in the tasks directory
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        // Access the database
+        final SQLiteDatabase db = mTaskDbHelper.getWritableDatabase();
+
+        // match code
+        int match = sUriMatcher.match(uri);
+
+        //Keep track of if an update occurs
+        int tasksUpdated;
+
+        switch (match) {
+            case TASK_WITH_ID:
+                //update a single task by getting the id
+                String id = uri.getPathSegments().get(1);
+                //using selections
+                tasksUpdated = db.update(TABLE_NAME, values, "_id=?", new String[]{id});
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if (tasksUpdated != 0) {
+            //set notifications if a task was updated
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        // return number of tasks updated
+        return tasksUpdated;
     }
 
 
